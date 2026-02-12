@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_project_test_plan" model="ir.sequence">
+            <field name="name">Test Plan Sequence</field>
+            <field name="code">project.test.plan.sequence</field>
+            <field name="prefix">TP-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="seq_project_test_scenario" model="ir.sequence">
+            <field name="name">Test Scenario Sequence</field>
+            <field name="code">project.test.scenario.sequence</field>
+            <field name="prefix">TS-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="seq_project_test_case" model="ir.sequence">
+            <field name="name">Test Case Sequence</field>
+            <field name="code">project.test.case.sequence</field>
+            <field name="prefix">TC-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="seq_project_ticket" model="ir.sequence">
+            <field name="name">Ticket Sequence</field>
+            <field name="code">project.ticket.sequence</field>
+            <field name="prefix">TK-</field>
+            <field name="padding">4</field>
+        </record>
+
+    </data>
+</odoo>

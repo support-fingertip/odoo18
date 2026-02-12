@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Test Case Form View -->
+    <record id="view_project_test_case_form" model="ir.ui.view">
+        <field name="name">project.test.case.form</field>
+        <field name="model">project.test.case</field>
+        <field name="arch" type="xml">
+            <form string="Test Case">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,pass,fail"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="test_case_title" required="1"/>
+                            <field name="module"/>
+                            <field name="test_type"/>
+                        </group>
+                        <group>
+                            <field name="severity"/>
+                            <field name="environment"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Test Details">
+                            <separator string="Test Objective"/>
+                            <field name="test_objective" nolabel="1"/>
+                            <separator string="Pre Conditions"/>
+                            <field name="pre_conditions" nolabel="1"/>
+                            <separator string="Test Data"/>
+                            <field name="test_data" nolabel="1"/>
+                            <separator string="Test Steps"/>
+                            <field name="test_steps" nolabel="1"/>
+                        </page>
+                        <page string="Results">
+                            <separator string="Expected Result"/>
+                            <field name="expected_result" nolabel="1"/>
+                            <separator string="Actual Result"/>
+                            <field name="actual_result" nolabel="1"/>
+                        </page>
+                        <page string="Execution">
+                            <group>
+                                <field name="executed_by_id"/>
+                                <field name="executed_date"/>
+                            </group>
+                        </page>
+                        <page string="Related">
+                            <group>
+                                <field name="project_id"/>
+                                <field name="test_plan_id"/>
+                                <field name="test_scenario_id"/>
+                            </group>
+                            <separator string="Tickets"/>
+                            <field name="ticket_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="title"/>
+                                    <field name="severity"/>
+                                    <field name="priority"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Test Case Tree View -->
+    <record id="view_project_test_case_tree" model="ir.ui.view">
+        <field name="name">project.test.case.tree</field>
+        <field name="model">project.test.case</field>
+        <field name="arch" type="xml">
+            <tree string="Test Cases">
+                <field name="name"/>
+                <field name="test_case_title"/>
+                <field name="module"/>
+                <field name="status"/>
+                <field name="severity"/>
+                <field name="test_type"/>
+                <field name="environment"/>
+                <field name="executed_by_id"/>
+                <field name="executed_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Test Case Search View -->
+    <record id="view_project_test_case_search" model="ir.ui.view">
+        <field name="name">project.test.case.search</field>
+        <field name="model">project.test.case</field>
+        <field name="arch" type="xml">
+            <search string="Test Cases">
+                <field name="name"/>
+                <field name="test_case_title"/>
+                <field name="module"/>
+                <filter string="Draft" name="draft" domain="[('status', '=', 'draft')]"/>
+                <filter string="Pass" name="pass" domain="[('status', '=', 'pass')]"/>
+                <filter string="Fail" name="fail" domain="[('status', '=', 'fail')]"/>
+                <filter string="Blocked" name="blocked" domain="[('status', '=', 'blocked')]"/>
+                <filter string="Not Executed" name="not_executed" domain="[('status', '=', 'not_executed')]"/>
+                <separator/>
+                <filter string="Blocker" name="blocker" domain="[('severity', '=', 'blocker')]"/>
+                <filter string="Critical" name="critical" domain="[('severity', '=', 'critical')]"/>
+                <separator/>
+                <filter string="Smoke" name="smoke" domain="[('test_type', '=', 'smoke')]"/>
+                <filter string="UAT" name="uat" domain="[('test_type', '=', 'uat')]"/>
+                <filter string="Regression" name="regression" domain="[('test_type', '=', 'regression')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Project" name="group_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Status" name="group_status" context="{'group_by': 'status'}"/>
+                    <filter string="Severity" name="group_severity" context="{'group_by': 'severity'}"/>
+                    <filter string="Test Type" name="group_test_type" context="{'group_by': 'test_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Test Case Action -->
+    <record id="action_project_test_case" model="ir.actions.act_window">
+        <field name="name">Test Cases</field>
+        <field name="res_model">project.test.case</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first test case
+            </p>
+        </field>
+    </record>
+
+</odoo>
