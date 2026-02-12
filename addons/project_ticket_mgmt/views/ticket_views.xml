@@ -36,9 +36,18 @@
                                 <div class="o_kanban_record_body">
                                     <field name="project_id"/>
                                     <div>
-                                        <span class="badge" t-attf-class="badge-#{record.severity.raw_value == 'blocker' ? 'danger' : record.severity.raw_value == 'critical' ? 'warning' : 'info'}">
-                                            <field name="severity"/>
-                                        </span>
+                                        <t t-if="record.severity.raw_value == 'blocker'">
+                                            <span class="badge badge-danger"><field name="severity"/></span>
+                                        </t>
+                                        <t t-elif="record.severity.raw_value == 'critical'">
+                                            <span class="badge badge-warning"><field name="severity"/></span>
+                                        </t>
+                                        <t t-elif="record.severity.raw_value == 'major'">
+                                            <span class="badge badge-info"><field name="severity"/></span>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="badge badge-secondary"><field name="severity"/></span>
+                                        </t>
                                         <span class="badge badge-secondary ml-1">
                                             <field name="priority"/>
                                         </span>

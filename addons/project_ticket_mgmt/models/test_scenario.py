@@ -21,11 +21,6 @@ class ProjectTestScenario(models.Model):
         string='Date',
         default=fields.Date.context_today,
     )
-    test_scenario_id_display = fields.Char(
-        string='Test Scenario ID',
-        compute='_compute_test_scenario_id_display',
-        store=True,
-    )
     module = fields.Char(
         string='Module',
     )
@@ -75,11 +70,6 @@ class ProjectTestScenario(models.Model):
         string='Company',
         default=lambda self: self.env.company,
     )
-
-    @api.depends('name')
-    def _compute_test_scenario_id_display(self):
-        for record in self:
-            record.test_scenario_id_display = record.name
 
     @api.model_create_multi
     def create(self, vals_list):

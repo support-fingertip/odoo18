@@ -13,7 +13,6 @@
     'depends': [
         'project',
         'mail',
-        'hr',
     ],
     'data': [
         'security/ticket_security.xml',
