@@ -1,0 +1,277 @@
+═══════════════════════════════════════════════════════════════════════════════
+                   HOW TO INSTALL PROJECT TICKET MANAGEMENT
+                            Quick Reference Guide
+═══════════════════════════════════════════════════════════════════════════════
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                         INSTALLATION METHODS                             ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+Choose ONE of the following methods:
+
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ METHOD 1: VIA ODOO UI (Easiest - Recommended for Most Users)            │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Step 1: Login to Odoo
+   → Open browser: http://your-odoo-url:8069
+   → Enter admin username and password
+
+Step 2: Go to Apps
+   → Click "Apps" in the top menu bar
+   → (You should see a list of available apps)
+
+Step 3: Update Apps List
+   → Click the "⋮" (three dots) or "Update Apps List" button
+   → Click "Update" in the confirmation dialog
+   → Wait a few seconds for the update to complete
+
+Step 4: Search for Module
+   → In the search box, type: "Project Ticket Management"
+   → Or type: "ticket"
+   → Remove any default filters if needed (click ❌ on filter chips)
+
+Step 5: Install
+   → You'll see: "Project Ticket Management" module card
+   → Click the "Install" button
+   → Wait 5-10 seconds
+
+Step 6: Verify
+   → Look for new menu: "QA & Testing" in main menu bar
+   → Click it to see: Test Plans, Test Scenarios, Test Cases, Tickets
+
+✅ DONE! Module is installed and ready to use!
+
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ METHOD 2: VIA COMMAND LINE (For Developers/System Admins)               │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Step 1: Open Terminal/Command Prompt
+
+Step 2: Navigate to Odoo Directory
+   $ cd /path/to/odoo18
+
+Step 3: Run Installation Command
+   $ ./odoo-bin -c odoo.conf -d your_database -i project_ticket_mgmt --stop-after-init
+
+   Replace:
+   - "odoo.conf" with your config file path
+   - "your_database" with your database name
+
+Step 4: Start Odoo Server
+   $ ./odoo-bin -c odoo.conf
+
+Step 5: Access Odoo
+   → Open browser: http://localhost:8069
+   → Login
+   → Look for "QA & Testing" menu
+
+✅ DONE!
+
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ METHOD 3: DOCKER (If Using Odoo in Docker Container)                    │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Step 1: Copy Module (if not already in volume)
+   $ docker cp project_ticket_mgmt your-container:/mnt/extra-addons/
+
+Step 2: Install Module
+   $ docker exec your-container ./odoo-bin -d DB -i project_ticket_mgmt --stop-after-init
+
+Step 3: Restart Container (if needed)
+   $ docker-compose restart odoo
+
+Step 4: Access via browser and verify
+
+✅ DONE!
+
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                       VERIFICATION SCRIPT                                ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+Before installing, you can verify the module files are correct:
+
+$ cd /path/to/odoo18
+$ ./addons/project_ticket_mgmt/verify_installation.sh
+
+This will check:
+✓ Module files are present
+✓ Python syntax is valid
+✓ XML files are valid
+✓ Manifest is correct
+
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                    POST-INSTALLATION SETUP                               ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+After installing, do these quick steps:
+
+1. ASSIGN USER GROUPS (Required)
+   ─────────────────────────────
+   Settings → Users & Companies → Users → Select User → Edit
+   
+   Scroll to "Ticket Management" and assign:
+   - QA Manager → For QA team leads (full access)
+   - Test Engineer → For QA testers (can create tests/tickets)
+   - Developer → For developers (can view/update assigned tickets)
+
+2. CREATE FIRST PROJECT (If you don't have one)
+   ────────────────────────────────────────────
+   Project → Create → Enter project name → Save
+
+3. CREATE FIRST TEST PLAN
+   ────────────────────────
+   QA & Testing → Test Plans → Create
+   - Select Project (required)
+   - Fill Test Objectives
+   - Save
+   - Check: ID should be "TP-0001"
+
+4. CREATE FIRST TICKET
+   ───────────────────
+   QA & Testing → Tickets → Create (in Kanban view)
+   - Enter Title: "Test Bug"
+   - Select Project
+   - Save
+   - Check: ID should be "TK-0001"
+
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                         QUICK TESTS                                      ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+Test 1: Menu Visible
+   ✓ "QA & Testing" appears in main menu
+
+Test 2: Models Work
+   ✓ Can open Test Plans
+   ✓ Can open Test Scenarios
+   ✓ Can open Test Cases
+   ✓ Can open Tickets
+
+Test 3: Sequences Work
+   ✓ Create test plan → ID starts with "TP-"
+   ✓ Create ticket → ID starts with "TK-"
+
+Test 4: Workflow Works
+   ✓ Create ticket
+   ✓ Click "Start Progress" → State changes to "In Progress"
+   ✓ Click "Mark as Fixed" → State changes to "Fixed"
+
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                     TROUBLESHOOTING                                      ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+Problem: Module not appearing in Apps list
+Solution: Make sure you clicked "Update Apps List" and waited for it to finish
+
+Problem: "Module not found" error
+Solution: Check that module is in correct location:
+          ls /path/to/odoo18/addons/project_ticket_mgmt/
+
+Problem: Can't see "QA & Testing" menu after install
+Solution: 1. Refresh browser page (Ctrl+F5)
+          2. Check user has appropriate group assigned
+          3. Try logging out and back in
+
+Problem: Access denied errors
+Solution: Assign user to "QA Manager" group in Settings → Users
+
+Problem: Sequences not generating (IDs stay at "/")
+Solution: Restart Odoo or reinstall module:
+          ./odoo-bin -d DB -u project_ticket_mgmt --stop-after-init
+
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                    DOCUMENTATION FILES                                   ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+📄 QUICKSTART.md              - Detailed step-by-step installation guide
+📄 INSTALLATION_CHEATSHEET.md - One-page quick reference
+📄 README.md                  - Feature overview and usage guide
+📄 INSTALL.md                 - Technical installation details
+📄 TECHNICAL.md               - Architecture and implementation details
+📄 MODULE_SUMMARY.md          - Complete feature list and statistics
+🔧 verify_installation.sh     - Verification script (run before installing)
+
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                      WHAT GETS INSTALLED                                 ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+When you install this module, you get:
+
+✅ 5 New Models:
+   • Test Plan (TP-XXXX)
+   • Test Scenario (TS-XXXX)
+   • Test Case (TC-XXXX)
+   • Ticket/Bug (TK-XXXX)
+   • Ticket Report (Analytics)
+
+✅ New Menu: "QA & Testing"
+   • Dashboard
+   • Test Plans
+   • Test Scenarios
+   • Test Cases
+   • Tickets
+   • Reporting → Ticket Analysis
+
+✅ 21 Views:
+   • Forms, Trees, Search views
+   • Kanban view for tickets
+   • Pivot and graph views for analytics
+
+✅ 3 Security Groups:
+   • QA Manager
+   • Test Engineer
+   • Developer
+
+✅ Complete Workflows:
+   • Test Plan approval workflow
+   • Ticket state management
+   • Resolution tracking
+
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                       CONTACT & SUPPORT                                  ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+Module Information:
+  Name: Project Ticket Management
+  Technical Name: project_ticket_mgmt
+  Version: 1.0
+  Category: Services/Project
+  License: LGPL-3
+
+Requirements:
+  Odoo Version: 18.0
+  Dependencies: project, mail
+  
+For Issues:
+  - Check documentation files listed above
+  - Review QUICKSTART.md for detailed instructions
+  - Check Odoo logs: /var/log/odoo/odoo.log
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                           QUICK INSTALL SUMMARY
+═══════════════════════════════════════════════════════════════════════════════
+
+   1. Login to Odoo
+   2. Go to Apps
+   3. Click "Update Apps List"
+   4. Search "Project Ticket Management"
+   5. Click "Install"
+   6. Look for "QA & Testing" menu
+   7. Assign user groups
+   8. Start creating test plans and tickets!
+
+                              THAT'S IT! 🎉
+
+═══════════════════════════════════════════════════════════════════════════════
