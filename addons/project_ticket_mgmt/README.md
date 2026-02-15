@@ -21,10 +21,27 @@ Comprehensive Ticket (Case) Management System for Quality Assurance and Testing 
 
 ## Installation
 
-1. Copy the module to your Odoo addons directory
+### Quick Start
+For detailed step-by-step installation instructions, see **[QUICKSTART.md](QUICKSTART.md)**
+
+### Quick Installation (3 Steps)
+1. Ensure the module is in your Odoo addons directory
 2. Update the apps list: `Settings > Apps > Update Apps List`
-3. Search for "Project Ticket Management"
-4. Click "Install"
+3. Search for "Project Ticket Management" and click "Install"
+
+### Verify Installation
+Run the verification script:
+```bash
+cd /path/to/odoo18
+./addons/project_ticket_mgmt/verify_installation.sh
+```
+
+### Command Line Installation
+```bash
+./odoo-bin -c odoo.conf -d your_database -i project_ticket_mgmt --stop-after-init
+```
+
+👉 **See [QUICKSTART.md](QUICKSTART.md) for detailed instructions with troubleshooting**
 
 ## Usage
 
