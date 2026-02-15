@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Root Menu -->
+    <menuitem id="menu_qa_testing_root"
+              name="QA &amp; Testing"
+              sequence="100"/>
+
+    <!-- Dashboard Menu -->
+    <menuitem id="menu_qa_testing_dashboard"
+              name="Dashboard"
+              parent="menu_qa_testing_root"
+              action="action_project_ticket"
+              sequence="1"/>
+
+    <!-- Test Plans Menu -->
+    <menuitem id="menu_qa_testing_test_plans"
+              name="Test Plans"
+              parent="menu_qa_testing_root"
+              action="action_project_test_plan"
+              sequence="10"/>
+
+    <!-- Test Scenarios Menu -->
+    <menuitem id="menu_qa_testing_test_scenarios"
+              name="Test Scenarios"
+              parent="menu_qa_testing_root"
+              action="action_project_test_scenario"
+              sequence="20"/>
+
+    <!-- Test Cases Menu -->
+    <menuitem id="menu_qa_testing_test_cases"
+              name="Test Cases"
+              parent="menu_qa_testing_root"
+              action="action_project_test_case"
+              sequence="30"/>
+
+    <!-- Tickets Menu -->
+    <menuitem id="menu_qa_testing_tickets"
+              name="Tickets"
+              parent="menu_qa_testing_root"
+              action="action_project_ticket"
+              sequence="40"/>
+
+    <!-- Reporting Parent Menu -->
+    <menuitem id="menu_qa_testing_reporting"
+              name="Reporting"
+              parent="menu_qa_testing_root"
+              sequence="90"/>
+
+    <!-- Ticket Analysis Menu -->
+    <menuitem id="menu_qa_testing_ticket_analysis"
+              name="Ticket Analysis"
+              parent="menu_qa_testing_reporting"
+              action="action_project_ticket_report"
+              sequence="10"/>
+
+</odoo>
